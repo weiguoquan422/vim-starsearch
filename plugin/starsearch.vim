@@ -47,7 +47,7 @@ function! s:VStarsearch_searchVWord()
     call histadd("/",@/)
 endfunction
 
-nnoremap <silent> * :call <SID>VStarsearch_searchCWord()<CR>:set hls<CR>:vimgrep //g %|norm ``<CR>
-vnoremap <silent> * :<C-u>call <SID>VStarsearch_searchVWord()<CR>:set hls<CR>:vimgrep //g %|norm ``<CR>
+nnoremap <silent> * :call <SID>VStarsearch_searchCWord()<CR>:set hls<CR>:%s ///n<CR>:norm ``<CR>
+vnoremap <silent> * :<C-u>call <SID>VStarsearch_searchVWord()<CR>:set hls<CR>:%s ///n<CR>:norm ``<CR>
 
 let &cpo = s:savedCpo
