@@ -1,5 +1,4 @@
-" Name: Star search
-" Author: Name5566 <name5566@gmail.com>
+" Name: starsearch
 " Version: 0.1.1
 
 if exists('loaded_starsearch')
@@ -10,23 +9,6 @@ let loaded_starsearch = 1
 let s:savedCpo = &cpo
 set cpo&vim
 
-function! Determine_initial_word_of_row()
-    let cur_word_row_num = line(".")
-    let cur_word_col_num = col(".")
-    if cur_word_row_num == 1 && cur_word_col_num == 1
-        let is_first_word = 1
-    else
-        norm ebb
-        let pre_word_row_num = line(".")
-        norm w
-        if cur_word_row_num == pre_word_row_num
-            let is_first_word = 0
-        else
-            let is_first_word = 1
-        endif
-    endif
-    return is_first_word
-endfunction
 
 function! s:VStarsearch_searchCWord()
 	let wordStr = expand("<cword>")
@@ -66,36 +48,27 @@ function! s:VStarsearch_searchVWord()
 endfunction
 
 function! SearchCword_CountMatch()
-    let i = Determine_initial_word_of_row()
-    if  i == 1
-        :call <SID>VStarsearch_searchCWord()
-        :%s ///gn
-    else
-        :call <SID>VStarsearch_searchCWord()
-        :norm wb
-        :%s ///gn
-        :norm ``
-    endif
-    return i
+    "get current position of your cursor
+    let save_pos = getpos(".")
+
+    "call VStarsearch_searchVWord in Vmode
+    :call <SID>VStarsearch_searchCWord()
+    "count matches use Ex command
+    :%s ///gn
+    "restore the position of your cursor
+    :call setpos('.', save_pos)
 endfunction
 
 function! s:VsearchWord_CountMatch()
-    let j = 0
-    let cur_word_col_num = col(".")
-    let i = Determine_initial_word_of_row()
-    if  i == 1
-        :call <SID>VStarsearch_searchVWord()
-        :%s ///gn
-    else
-        :call <SID>VStarsearch_searchVWord()
-        :%s ///gn
-        :norm 0
-        while j <= cur_word_col_num
-            let j = j+1
-            :norm l
-        endwhile
-    endif
-    return cur_word_col_num
+    "get current position of your cursor
+    let save_pos = getpos(".")
+
+    "call VStarsearch_searchVWord in Vmode
+    :call <SID>VStarsearch_searchVWord()
+    "count matches use Ex command
+    :%s ///gn
+    "restore the position of your cursor
+    :call setpos('.', save_pos)
 endfunction
 
 nnoremap <silent> * :call SearchCword_CountMatch()<CR>:set hls<CR>

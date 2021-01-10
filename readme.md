@@ -1,6 +1,6 @@
 # readme.md
 
-refer:https://www.vim.org/scripts/script.php?script_id=4335
+thanks:https://www.vim.org/scripts/script.php?script_id=4335
 
 normal mode:
 Change the behavior of the super star(*) key. Vim don't jump to the next match when * is pressed. Also add the word to search history and count match.
