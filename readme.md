@@ -1,6 +1,10 @@
 # readme.md
 
+## Introduction
+
 **If you don't like the way vim jumps to the next match by default when the \* key is pressed, this vim plug-in will be a good choice.**
+
+## Features
 
 The plug provides two search modes with the * key.
 
@@ -18,4 +22,10 @@ Add * key support for visual mode. You can select some text (using visual mode) 
 
 And, all searches will be stroed in the search history.
 
-thanks:https://www.vim.org/scripts/script.php?script_id=4335
+## Install
+
+It is recommended to use [vim-plug](https://github.com/junegunn/vim-plug) to install the plug-in:
+`Plug 'weiguoquan422/vim-starsearch'`
+
+## Reference
+https://www.vim.org/scripts/script.php?script_id=4335
